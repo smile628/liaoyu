@@ -282,6 +282,7 @@
             letter-spacing: 8px;
             text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
             margin-bottom: 20px;
+            white-space: nowrap;
         }
 
         .book-hint {
@@ -595,16 +596,112 @@
             }
 
             .book-container {
-                width: 220px;
-                height: 320px;
+                width: 240px;
+                height: 340px;
+            }
+
+            .book-title {
+                font-size: 28px;
+                letter-spacing: 6px;
+            }
+
+            .book-hint {
+                font-size: 13px;
+                letter-spacing: 2px;
+            }
+
+            .book-symbol {
+                width: 80px;
+                height: 80px;
             }
 
             .answer-main {
                 font-size: 20px;
+                letter-spacing: 2px;
             }
 
             .answer-container {
                 padding: 50px 30px;
+            }
+
+            .answer-extended {
+                font-size: 13px;
+                letter-spacing: 0.5px;
+            }
+
+            .action-btn {
+                padding: 10px 20px;
+                font-size: 12px;
+            }
+        }
+
+        /* 超小屏幕适配 */
+        @media (max-width: 360px) {
+            .book-container {
+                width: 200px;
+                height: 300px;
+            }
+
+            .book-title {
+                font-size: 24px;
+                letter-spacing: 4px;
+            }
+
+            .book-symbol {
+                width: 70px;
+                height: 70px;
+                margin-bottom: 20px;
+            }
+
+            .book-hint {
+                font-size: 12px;
+                margin-top: 20px;
+            }
+
+            .main-title {
+                font-size: 20px;
+                letter-spacing: 6px;
+            }
+
+            .answer-main {
+                font-size: 18px;
+            }
+
+            .answer-extended {
+                font-size: 12px;
+            }
+
+            .action-area {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .action-btn {
+                width: 100%;
+            }
+        }
+
+        /* 平板适配 */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .book-container {
+                width: 270px;
+                height: 370px;
+            }
+
+            .answer-container {
+                max-width: 450px;
+            }
+        }
+
+        /* 平板横屏适配 */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .book-container {
+                width: 280px;
+                height: 380px;
+            }
+
+            .answer-container {
+                max-width: 500px;
             }
         }
 
@@ -616,6 +713,54 @@
             .guide-text,
             .charging-text {
                 bottom: 50px;
+            }
+
+            .book-container {
+                width: 220px;
+                height: 320px;
+            }
+        }
+
+        /* 超矮屏幕适配 */
+        @media (max-height: 600px) {
+            .title-area {
+                top: 30px;
+            }
+
+            .main-title {
+                font-size: 20px;
+                margin-bottom: 8px;
+            }
+
+            .subtitle {
+                font-size: 11px;
+            }
+
+            .book-container {
+                width: 180px;
+                height: 260px;
+            }
+
+            .book-title {
+                font-size: 22px;
+                letter-spacing: 4px;
+            }
+
+            .book-symbol {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 15px;
+            }
+
+            .book-hint {
+                font-size: 12px;
+                margin-top: 15px;
+            }
+
+            .guide-text,
+            .charging-text {
+                bottom: 30px;
+                font-size: 11px;
             }
         }
 
