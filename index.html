@@ -35,6 +35,217 @@
             position: relative;
         }
 
+        /* ========== 密码验证界面 ========== */
+        #passwordGate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(45, 27, 61, 0.95) 0%, rgba(10, 10, 18, 0.98) 70%, #000000 100%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+
+        #passwordGate.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .gate-stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .gate-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: starTwinkle 3s ease-in-out infinite;
+        }
+
+        .password-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            padding: 50px 40px;
+            background: rgba(20, 15, 30, 0.6);
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(20px);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(212, 175, 55, 0.1);
+        }
+
+        .password-icon {
+            font-size: 48px;
+            margin-bottom: 25px;
+            opacity: 0;
+            animation: iconFloat 1s ease 0.3s forwards;
+        }
+
+        @keyframes iconFloat {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 0.8;
+                transform: translateY(0);
+            }
+        }
+
+        .password-title {
+            font-size: 28px;
+            letter-spacing: 8px;
+            color: var(--light-gold);
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            opacity: 0;
+            animation: titleFadeIn 1s ease 0.5s forwards;
+        }
+
+        @keyframes titleFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .password-hint {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 3px;
+            margin-bottom: 35px;
+            line-height: 1.8;
+            opacity: 0;
+            animation: hintFadeIn 1s ease 0.7s forwards;
+        }
+
+        @keyframes hintFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .password-input-wrapper {
+            position: relative;
+            margin-bottom: 25px;
+            opacity: 0;
+            animation: inputFadeIn 1s ease 0.9s forwards;
+        }
+
+        @keyframes inputFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 16px;
+            letter-spacing: 8px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 30px;
+            color: white;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        .password-input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .password-input:focus {
+            border-color: var(--light-gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .password-submit {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 15px;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.8) 0%, rgba(180, 140, 40, 0.8) 100%);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Noto Serif SC', serif;
+            opacity: 0;
+            animation: buttonFadeIn 1s ease 1.1s forwards;
+        }
+
+        @keyframes buttonFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .password-submit:hover {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 1) 0%, rgba(180, 140, 40, 1) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .password-submit:active {
+            transform: translateY(0);
+        }
+
+        .password-error {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #ff6b6b;
+            letter-spacing: 2px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .password-error.show {
+            opacity: 1;
+        }
+
+        .password-footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 2px;
+            opacity: 0;
+            animation: footerFadeIn 1s ease 1.3s forwards;
+        }
+
+        @keyframes footerFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ========== 以下是原有的疗愈解药样式 ========== */
         /* 星空背景 - 增强版 */
         .stars {
             position: fixed;
@@ -128,17 +339,6 @@
             text-align: center;
             opacity: 0;
             animation: titleFadeIn 2s ease 0.5s forwards;
-        }
-
-        @keyframes titleFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .main-title {
@@ -633,6 +833,19 @@
                 padding: 10px 20px;
                 font-size: 12px;
             }
+
+            .password-container {
+                padding: 40px 30px;
+            }
+
+            .password-title {
+                font-size: 24px;
+                letter-spacing: 6px;
+            }
+
+            .password-hint {
+                font-size: 13px;
+            }
         }
 
         /* 超小屏幕适配 */
@@ -678,6 +891,14 @@
 
             .action-btn {
                 width: 100%;
+            }
+
+            .password-container {
+                padding: 35px 25px;
+            }
+
+            .password-title {
+                font-size: 22px;
             }
         }
 
@@ -770,9 +991,42 @@
             user-select: none;
             -webkit-touch-callout: none;
         }
+
+        input {
+            -webkit-user-select: text;
+            user-select: text;
+        }
     </style>
 </head>
 <body>
+    <!-- 密码验证界面 -->
+    <div id="passwordGate">
+        <div class="gate-stars" id="gateStars"></div>
+        
+        <div class="password-container">
+            <div class="password-icon">🔮</div>
+            <h1 class="password-title">疗愈解药</h1>
+            <p class="password-hint">请输入疗愈口令<br>方可开启答案之书</p>
+            
+            <div class="password-input-wrapper">
+                <input 
+                    type="password" 
+                    id="passwordInput" 
+                    class="password-input" 
+                    placeholder="输入口令"
+                    autocomplete="off"
+                    maxlength="20"
+                />
+            </div>
+            
+            <button class="password-submit" id="passwordSubmit">开启疗愈之旅</button>
+            
+            <div class="password-error" id="passwordError">口令错误，请重新输入</div>
+            
+            <p class="password-footer">深夜 · 治愈 · 回应</p>
+        </div>
+    </div>
+
     <!-- 星空背景 -->
     <div class="stars" id="stars"></div>
 
@@ -829,332 +1083,382 @@
     </div>
 
     <script>
-        // 100条疗愈文案库 - 每条包含主文案和延伸解读
-        const answers = [
-            { main: "停止自我怀疑，你已经做得够好了。", sub: "不是你不够努力，是你对自己太苛刻。那些看似微小的进步，其实都在累积成更好的你。" },
-            { main: "这一次，结果会超出你的预期。", sub: "你的付出正在悄悄生效，只是还没到收获的季节。再坚持一下，惊喜就在转角。" },
-            { main: "别急，时间会给你答案。", sub: "有些事需要时间沉淀，急于求成反而会错过最好的结果。慢一点，让事情自然发生。" },
-            { main: "你的直觉是对的，相信它。", sub: "内心的声音往往比理性分析更接近真相。那个让你心动的选择，就是答案。" },
-            { main: "放下那些不属于你的期待。", sub: "不是所有人都能理解你的选择，但你不需要为了迎合别人而改变自己。" },
-            { main: "这个决定会带来意想不到的转机。", sub: "看似冒险的一步，往往是通往新生活的入口。勇敢一点，跳出舒适区。" },
-            { main: "你值得更温柔的对待。", sub: "不要再接受那些敷衍和冷漠，你应该被认真地爱着、在意着、珍惜着。" },
-            { main: "此刻的迷茫，是转变的前兆。", sub: "迷茫不是停滞，而是你的内心在重新定位方向。给自己一点时间，答案会浮现。" },
-            { main: "先照顾好自己，再去爱别人。", sub: "你已经把所有的温柔都给了别人，现在该轮到自己了。自私一点，不是错。" },
-            { main: "那些离开的，都是为了给更好的腾地方。", sub: "失去不是终点，是清空。当旧的离开，新的才有空间进来。" },
-            
-            { main: "你的价值不需要被证明。", sub: "不用通过讨好、牺牲、完美来换取认可。你的存在本身，就是价值。" },
-            { main: "这段关系，该放手了。", sub: "单向的付出不是爱，是消耗。如果一个人让你一直委屈，那就是答案。" },
-            { main: "接下来的三个月，会有好消息。", sub: "你等待的那件事，正在悄悄发酵。保持耐心，好事正在路上。" },
-            { main: "别为难自己，你不欠任何人。", sub: "不需要为了维持关系而勉强自己。真正在意你的人，不会让你这么累。" },
-            { main: "现在就是最好的时机。", sub: "不要等到一切完美才开始，完美永远不会到来。此刻，就是你的起点。" },
-            { main: "你的敏感是天赋，不是缺陷。", sub: "能感受到细微情绪的人，往往也更懂得温柔。不要因为敏感而否定自己。" },
-            { main: "这个人，不值得你的眼泪。", sub: "让你一次次失望的人，不配得到你的真心。哭完就好了，该放下了。" },
-            { main: "你缺的不是方法，是决心。", sub: "所有条件都已经具备，现在需要的只是你下定决心。别再给自己找借口。" },
-            { main: "允许自己不完美。", sub: "不需要时刻坚强、优秀、懂事。偶尔脆弱、犯错、任性，都是正常的。" },
-            { main: "这次分离，是为了更好的重逢。", sub: "暂时的告别不是结束，而是各自成长的必经之路。有些人会回来的。" },
-            
-            { main: "换个环境，一切都会不同。", sub: "困住你的不是能力，是环境。去一个新的地方，你会发现自己的另一面。" },
-            { main: "那个让你心动的选择，就是答案。", sub: "理性告诉你要谨慎，但内心的声音更懂你。这一次，听从心的方向。" },
-            { main: "你的焦虑来自想得太多，做得太少。", sub: "停止过度思考，先做一件小事。行动起来，焦虑自然会减少。" },
-            { main: "不要在深夜做决定。", sub: "深夜的情绪会放大痛苦，扭曲判断。睡一觉，明天再决定。" },
-            { main: "这段时间的沉寂，是在积蓄能量。", sub: "看不见的进步不代表没有进步。种子在土里时，也在生长。" },
-            { main: "你需要的不是建议，是勇气。", sub: "你心里已经有答案了，只是不敢承认。给自己一点勇气，去做那个决定。" },
-            { main: "别把别人的问题，当成自己的责任。", sub: "你不需要拯救任何人，每个人都要为自己的选择负责。包括你自己。" },
-            { main: "贵人就在你身边，留心观察。", sub: "那个能帮你的人，可能已经出现了。抬起头，主动建立连接。" },
-            { main: "这是一个适合表白的时刻。", sub: "对方对你也有好感，只是在等你的信号。大胆一点，说出来。" },
-            { main: "你的善良不该被辜负。", sub: "如果一个人一直在利用你的善良，那不是你的问题，是他不配。" },
-            
-            { main: "财运正在靠近，保持专注。", sub: "你的努力正在转化为回报，继续做好当下的事，钱会来的。" },
-            { main: "这段关系值得修复。", sub: "虽然有裂痕，但根基还在。如果你还在意，就试着沟通一次。" },
-            { main: "你的磁场正在变强。", sub: "最近的改变让你的能量提升了，你会吸引到更好的人和事。" },
-            { main: "学会说不，生活会简单很多。", sub: "拒绝不该做的事，才能专注重要的事。别害怕让别人失望。" },
-            { main: "这次，命运站在你这边。", sub: "一切都在朝着对你有利的方向发展，放心去做，结果会是好的。" },
-            { main: "你不需要向任何人解释。", sub: "你的选择、你的生活、你的感受，都不需要得到别人的理解。" },
-            { main: "暂时的失去，是为了更大的得到。", sub: "宇宙在为你清空旧的，好让更好的进来。相信这个安排。" },
-            { main: "这个人会给你带来改变。", sub: "即将出现的那个人，会打开你生活的新篇章。保持开放的心态。" },
-            { main: "别在错的人身上浪费时间。", sub: "如果一段关系让你一直怀疑自己，那问题不在你，是这个人不对。" },
-            { main: "你的努力会被看见。", sub: "虽然现在还没有回报，但有人在默默注意着你的付出。继续坚持。" },
-            
-            { main: "这次冲突，会让关系更好。", sub: "有些话需要说开，裂痕修补后反而更牢固。别害怕冲突。" },
-            { main: "你的身体在提醒你：该休息了。", sub: "疲惫、生病都是信号。停下来，好好照顾自己。工作永远做不完。" },
-            { main: "换一个角度，危机就是转机。", sub: "看似的困境，往往是命运在推着你去新的方向。别抗拒，顺势而为。" },
-            { main: "你的问题不在能力，在心态。", sub: "自我怀疑比能力不足更可怕。放下那些负面声音，你会发现自己很厉害。" },
-            { main: "这个选择，会打开新世界。", sub: "虽然有风险，但回报更大。人生有些时候，需要赌一把。" },
-            { main: "你的付出，对方都记得。", sub: "你以为被忽略的那些温柔，其实都被悄悄珍藏着。会有回应的。" },
-            { main: "别活在别人的期待里。", sub: "父母、朋友、社会的期待都不重要，重要的是你想成为什么样的人。" },
-            { main: "这段时间适合专注内在。", sub: "不要急着向外求，先向内看。了解自己，比了解世界更重要。" },
-            { main: "你值得被爱，不需要改变。", sub: "不需要变得更瘦、更美、更温柔才配被爱。你现在这样，就值得。" },
-            { main: "这个机会，抓住就是了。", sub: "犹豫就会错过。有些机会不会等你准备好，先跳进去再说。" },
-            
-            { main: "你的疲惫是真实的，不是矫情。", sub: "累了就承认，不需要假装坚强。真正的勇敢是承认脆弱。" },
-            { main: "那些嫉妒你的人，证明你做对了。", sub: "被议论、被嫉妒，说明你正在往上走。别被噪音影响。" },
-            { main: "你需要的是陪伴，不是建议。", sub: "有时候倾诉不是为了得到答案，只是需要有人听。找对人说话。" },
-            { main: "这段感情，需要时间冷静。", sub: "暂时分开不是放弃，是给彼此空间。冷静后再决定是否继续。" },
-            { main: "你的直觉在保护你。", sub: "那种说不清的不安感，往往是潜意识在警告。听从它，别说服自己。" },
-            { main: "换份工作，会有新突破。", sub: "现在的平台限制了你，去更大的地方，你会发现自己的可能性。" },
-            { main: "这个投资值得。", sub: "虽然需要付出，但长远来看是增值的。相信自己的判断。" },
-            { main: "你的底线，不容任何人践踏。", sub: "让步一次，就会有第二次。这次，坚定地说不。" },
-            { main: "孤独是成长的必经之路。", sub: "一个人的时光，是在学习与自己相处。这段经历会让你更强大。" },
-            { main: "你的选择，会被时间证明是对的。", sub: "现在看起来冒险的决定，几年后会庆幸自己当初的勇敢。" },
-            
-            { main: "这段关系，该升级了。", sub: "如果你们已经准备好，不要再拖延。该确定关系就确定，该结婚就结婚。" },
-            { main: "你缺的不是方向，是执行力。", sub: "目标已经很清楚了，现在需要的是少说多做。行动起来。" },
-            { main: "那个人会回来的。", sub: "如果这段缘分还没结束，该来的总会来。但不要傻等，继续过好自己的生活。" },
-            { main: "你的健康需要被重视。", sub: "身体的信号不能忽略，该检查就检查，该调整就调整。健康是1，其他是0。" },
-            { main: "这次，宇宙在帮你筛选。", sub: "那些离开的人，都是为了给对的人腾位置。相信这个过程。" },
-            { main: "你的天赋在被浪费。", sub: "现在做的事，不是你真正擅长的。找到那个让你发光的领域。" },
-            { main: "别把关系看得太重。", sub: "过度在意反而会失去。保持适当的距离，关系才健康。" },
-            { main: "这个决定会让你后悔。", sub: "冷静下来再想想，有些东西失去了就回不来了。三思而后行。" },
-            { main: "你需要一场说走就走的旅行。", sub: "换个环境，很多困扰会自动解开。出去走走，给心灵放个假。" },
-            { main: "这段时间适合学习新技能。", sub: "投资自己永远不亏。学会的东西，是别人拿不走的财富。" },
-            
-            { main: "你的善良要有锋芒。", sub: "对的人温柔，对错的人冷漠。善良不是软弱，该强硬时要强硬。" },
-            { main: "这次的痛苦，是在帮你蜕变。", sub: "破茧成蝶是痛苦的，但只有经历这个过程，才能飞起来。" },
-            { main: "你和对方，频率不同。", sub: "不是谁的错，只是不合适。强求只会更累，放手是解脱。" },
-            { main: "这个时间点，做什么都顺。", sub: "你的运势正处在上升期，大胆去做那些一直想做的事。" },
-            { main: "你需要建立自己的边界。", sub: "让别人知道你的底线在哪里。没有边界的关系，会耗尽你。" },
-            { main: "那些不理解你的人，不配你解释。", sub: "真正在意你的人，会主动理解。不在意的人，解释也没用。" },
-            { main: "你的沉默，比争吵更有力量。", sub: "有些话不需要说，有些人不值得吵。沉默是最好的回应。" },
-            { main: "这段感情，需要仪式感。", sub: "用心经营的关系，需要被看见。该纪念就纪念，该庆祝就庆祝。" },
-            { main: "你的恐惧，都是想象出来的。", sub: "最坏的结果，往往没有你想的那么糟。行动起来，恐惧会消失。" },
-            { main: "这次的失败，是在铺路。", sub: "每一次跌倒，都是在为更大的成功做准备。别灰心，继续走。" },
-            
-            { main: "你需要断舍离。", sub: "扔掉那些占据空间的东西，包括物品、关系、回忆。轻装才能前行。" },
-            { main: "这个人，会给你想要的安全感。", sub: "遇到对的人，你不会患得患失。如果总是不安，说明还不对。" },
-            { main: "你的计划会实现，但会换个形式。", sub: "结果可能不是你预期的样子，但会是更好的版本。保持开放。" },
-            { main: "别急着和解，该冷就冷着。", sub: "有些关系需要距离，有些人需要被晾一晾。不要主动低头。" },
-            { main: "你的价值观在升级。", sub: "很多过去在意的东西，现在不在意了。这是成长的标志。" },
-            { main: "这个阶段，适合积累而非展示。", sub: "低头做事，不要急着让别人看到。真正的实力，不需要证明。" },
-            { main: "你的委屈，会换来成长。", sub: "那些让你受伤的经历，都在教你如何保护自己。疼过后会更强。" },
-            { main: "这个机会，是命运的礼物。", sub: "看似意外的机会，其实是你一直在准备的结果。大胆接住它。" },
-            { main: "你需要重新定义成功。", sub: "别人眼中的成功，不一定适合你。找到自己的节奏和标准。" },
-            { main: "这段关系，该设置期限了。", sub: "如果一直没有进展，给它一个期限。到时候再决定去留。" },
-            
-            { main: "你的内耗，来自对未知的恐惧。", sub: "专注当下能做的事，未来的事交给未来。活在此刻。" },
-            { main: "那些批评你的人，是在帮你筛选朋友。", sub: "真正的朋友，会在你不完美时依然支持你。其他人不重要。" },
-            { main: "你的天赋，该被变现了。", sub: "不要让爱好只是爱好，想办法让它养活你。天赋是用来绽放的。" },
-            { main: "这次的改变，会带来蝴蝶效应。", sub: "一个小的调整，会引发一系列连锁反应。相信改变的力量。" },
-            { main: "你和父母的关系，该重新定义了。", sub: "长大后的你，可以选择保持距离、设立边界。不需要愧疚。" },
-            { main: "这段时间适合复盘和整理。", sub: "停下来看看自己走过的路，总结经验，为下一步做准备。" },
-            { main: "你的直觉和现实，都指向同一个答案。", sub: "当理性和感性一致时，就是行动的时候。不要再犹豫了。" },
-            { main: "这个人，不会改变。", sub: "期待一个人改变，是在浪费时间。要么接受，要么离开。" },
-            { main: "你需要的是行动，而非完美计划。", sub: "计划永远赶不上变化，先做起来，边做边调整。完美是敌人。" },
-            { main: "世界正温柔地爱着你。", sub: "那些看似偶然的美好，都是宇宙在以它的方式守护你。感受这份爱。" }
-        ];
+        // ========== 密码验证系统 ==========
+        // 设置你的疗愈口令（可以修改）
+        const HEALING_PASSWORD = "835508717";  // ⬅️ 在这里修改你的口令
+        
+        // 密码验证逻辑
+        const passwordGate = document.getElementById('passwordGate');
+        const passwordInput = document.getElementById('passwordInput');
+        const passwordSubmit = document.getElementById('passwordSubmit');
+        const passwordError = document.getElementById('passwordError');
 
-        // DOM元素
-        const bookTrigger = document.getElementById('bookTrigger');
-        const mainScene = document.getElementById('mainScene');
-        const answerScene = document.getElementById('answerScene');
-        const answerMain = document.getElementById('answerMain');
-        const answerExtended = document.getElementById('answerExtended');
-        const retryBtn = document.getElementById('retryBtn');
-        const saveBtn = document.getElementById('saveBtn');
-
-        let chargeTimer = null;
-        let chargeProgress = 0;
-        const CHARGE_DURATION = 1500; // 1.5秒蓄力时间
-
-        // 初始化星空 - 三层星星
-        function initStars() {
-            const starsContainer = document.getElementById('stars');
-            
-            // 第一层：大而亮的星星 (30个)
+        // 生成密码验证页面的星空
+        function initGateStars() {
+            const container = document.getElementById('gateStars');
             for (let i = 0; i < 30; i++) {
                 const star = document.createElement('div');
-                star.className = 'star layer-1';
+                star.className = 'gate-star';
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 4 + 's';
-                star.style.animationDuration = (3 + Math.random() * 3) + 's';
-                starsContainer.appendChild(star);
-            }
-            
-            // 第二层：中等星星 (50个)
-            for (let i = 0; i < 50; i++) {
-                const star = document.createElement('div');
-                star.className = 'star layer-2';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 4 + 's';
-                star.style.animationDuration = (2 + Math.random() * 4) + 's';
-                starsContainer.appendChild(star);
-            }
-            
-            // 第三层：小而暗的星星 (80个)
-            for (let i = 0; i < 80; i++) {
-                const star = document.createElement('div');
-                star.className = 'star layer-3';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 4 + 's';
-                star.style.animationDuration = (4 + Math.random() * 4) + 's';
-                starsContainer.appendChild(star);
+                star.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(star);
             }
         }
 
-        // 创建流星
-        function createShootingStar() {
-            const star = document.createElement('div');
-            star.className = 'shooting-star';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 50 + '%';
-            document.getElementById('stars').appendChild(star);
+        // 验证密码
+        function verifyPassword() {
+            const inputValue = passwordInput.value.trim();
             
-            setTimeout(() => star.remove(), 3000);
-        }
-
-        // 定期生成流星 - 更频繁
-        setInterval(() => {
-            if (Math.random() > 0.5) { // 50%概率
-                createShootingStar();
-            }
-        }, 2000); // 每2秒一次
-
-        // 开始蓄力
-        function startCharging() {
-            if (chargeProgress > 0) return; // 防止重复触发
-            
-            chargeProgress = 0;
-            bookTrigger.classList.add('charging');
-            
-            const startTime = Date.now();
-            
-            chargeTimer = setInterval(() => {
-                const elapsed = Date.now() - startTime;
-                chargeProgress = Math.min((elapsed / CHARGE_DURATION) * 100, 100);
+            if (inputValue === HEALING_PASSWORD) {
+                // 密码正确
+                passwordError.classList.remove('show');
+                passwordGate.classList.add('hidden');
                 
-                if (chargeProgress >= 100) {
+                // 1.5秒后完全移除密码界面
+                setTimeout(() => {
+                    passwordGate.style.display = 'none';
+                    // 初始化主页面
+                    initMainPage();
+                }, 1000);
+            } else {
+                // 密码错误
+                passwordError.classList.add('show');
+                passwordInput.value = '';
+                passwordInput.focus();
+                
+                // 抖动效果
+                passwordInput.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    passwordInput.style.animation = '';
+                }, 500);
+            }
+        }
+
+        // 按钮点击事件
+        passwordSubmit.addEventListener('click', verifyPassword);
+
+        // 回车键提交
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                verifyPassword();
+            }
+        });
+
+        // 抖动动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-10px); }
+                75% { transform: translateX(10px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // 初始化密码页面星空
+        initGateStars();
+
+        // 页面加载时自动聚焦输入框
+        setTimeout(() => {
+            passwordInput.focus();
+        }, 500);
+
+        // ========== 主页面初始化（密码验证通过后才执行） ==========
+        function initMainPage() {
+            // 100条疗愈文案库
+            const answers = [
+                { main: "停止自我怀疑，你已经做得够好了。", sub: "不是你不够努力，是你对自己太苛刻。那些看似微小的进步，其实都在累积成更好的你。" },
+                { main: "这一次，结果会超出你的预期。", sub: "你的付出正在悄悄生效，只是还没到收获的季节。再坚持一下，惊喜就在转角。" },
+                { main: "别急，时间会给你答案。", sub: "有些事需要时间沉淀，急于求成反而会错过最好的结果。慢一点，让事情自然发生。" },
+                { main: "你的直觉是对的，相信它。", sub: "内心的声音往往比理性分析更接近真相。那个让你心动的选择，就是答案。" },
+                { main: "放下那些不属于你的期待。", sub: "不是所有人都能理解你的选择，但你不需要为了迎合别人而改变自己。" },
+                { main: "这个决定会带来意想不到的转机。", sub: "看似冒险的一步，往往是通往新生活的入口。勇敢一点，跳出舒适区。" },
+                { main: "你值得更温柔的对待。", sub: "不要再接受那些敷衍和冷漠，你应该被认真地爱着、在意着、珍惜着。" },
+                { main: "此刻的迷茫，是转变的前兆。", sub: "迷茫不是停滞，而是你的内心在重新定位方向。给自己一点时间，答案会浮现。" },
+                { main: "先照顾好自己，再去爱别人。", sub: "你已经把所有的温柔都给了别人，现在该轮到自己了。自私一点，不是错。" },
+                { main: "那些离开的，都是为了给更好的腾地方。", sub: "失去不是终点，是清空。当旧的离开，新的才有空间进来。" },
+                { main: "你的价值不需要被证明。", sub: "不用通过讨好、牺牲、完美来换取认可。你的存在本身，就是价值。" },
+                { main: "这段关系，该放手了。", sub: "单向的付出不是爱，是消耗。如果一个人让你一直委屈，那就是答案。" },
+                { main: "接下来的三个月，会有好消息。", sub: "你等待的那件事，正在悄悄发酵。保持耐心，好事正在路上。" },
+                { main: "别为难自己，你不欠任何人。", sub: "不需要为了维持关系而勉强自己。真正在意你的人，不会让你这么累。" },
+                { main: "现在就是最好的时机。", sub: "不要等到一切完美才开始，完美永远不会到来。此刻，就是你的起点。" },
+                { main: "你的敏感是天赋，不是缺陷。", sub: "能感受到细微情绪的人，往往也更懂得温柔。不要因为敏感而否定自己。" },
+                { main: "这个人，不值得你的眼泪。", sub: "让你一次次失望的人，不配得到你的真心。哭完就好了，该放下了。" },
+                { main: "你缺的不是方法，是决心。", sub: "所有条件都已经具备，现在需要的只是你下定决心。别再给自己找借口。" },
+                { main: "允许自己不完美。", sub: "不需要时刻坚强、优秀、懂事。偶尔脆弱、犯错、任性，都是正常的。" },
+                { main: "这次分离，是为了更好的重逢。", sub: "暂时的告别不是结束，而是各自成长的必经之路。有些人会回来的。" },
+                { main: "换个环境，一切都会不同。", sub: "困住你的不是能力，是环境。去一个新的地方，你会发现自己的另一面。" },
+                { main: "那个让你心动的选择，就是答案。", sub: "理性告诉你要谨慎，但内心的声音更懂你。这一次，听从心的方向。" },
+                { main: "你的焦虑来自想得太多，做得太少。", sub: "停止过度思考，先做一件小事。行动起来，焦虑自然会减少。" },
+                { main: "不要在深夜做决定。", sub: "深夜的情绪会放大痛苦，扭曲判断。睡一觉，明天再决定。" },
+                { main: "这段时间的沉寂，是在积蓄能量。", sub: "看不见的进步不代表没有进步。种子在土里时，也在生长。" },
+                { main: "你需要的不是建议，是勇气。", sub: "你心里已经有答案了，只是不敢承认。给自己一点勇气，去做那个决定。" },
+                { main: "别把别人的问题，当成自己的责任。", sub: "你不需要拯救任何人，每个人都要为自己的选择负责。包括你自己。" },
+                { main: "贵人就在你身边，留心观察。", sub: "那个能帮你的人，可能已经出现了。抬起头，主动建立连接。" },
+                { main: "这是一个适合表白的时刻。", sub: "对方对你也有好感，只是在等你的信号。大胆一点，说出来。" },
+                { main: "你的善良不该被辜负。", sub: "如果一个人一直在利用你的善良，那不是你的问题，是他不配。" },
+                { main: "财运正在靠近，保持专注。", sub: "你的努力正在转化为回报，继续做好当下的事，钱会来的。" },
+                { main: "这段关系值得修复。", sub: "虽然有裂痕，但根基还在。如果你还在意，就试着沟通一次。" },
+                { main: "你的磁场正在变强。", sub: "最近的改变让你的能量提升了，你会吸引到更好的人和事。" },
+                { main: "学会说不，生活会简单很多。", sub: "拒绝不该做的事，才能专注重要的事。别害怕让别人失望。" },
+                { main: "这次，命运站在你这边。", sub: "一切都在朝着对你有利的方向发展，放心去做，结果会是好的。" },
+                { main: "你不需要向任何人解释。", sub: "你的选择、你的生活、你的感受，都不需要得到别人的理解。" },
+                { main: "暂时的失去，是为了更大的得到。", sub: "宇宙在为你清空旧的，好让更好的进来。相信这个安排。" },
+                { main: "这个人会给你带来改变。", sub: "即将出现的那个人，会打开你生活的新篇章。保持开放的心态。" },
+                { main: "别在错的人身上浪费时间。", sub: "如果一段关系让你一直怀疑自己，那问题不在你，是这个人不对。" },
+                { main: "你的努力会被看见。", sub: "虽然现在还没有回报，但有人在默默注意着你的付出。继续坚持。" },
+                { main: "这次冲突，会让关系更好。", sub: "有些话需要说开，裂痕修补后反而更牢固。别害怕冲突。" },
+                { main: "你的身体在提醒你：该休息了。", sub: "疲惫、生病都是信号。停下来，好好照顾自己。工作永远做不完。" },
+                { main: "换一个角度，危机就是转机。", sub: "看似的困境，往往是命运在推着你去新的方向。别抗拒，顺势而为。" },
+                { main: "你的问题不在能力，在心态。", sub: "自我怀疑比能力不足更可怕。放下那些负面声音，你会发现自己很厉害。" },
+                { main: "这个选择，会打开新世界。", sub: "虽然有风险，但回报更大。人生有些时候，需要赌一把。" },
+                { main: "你的付出，对方都记得。", sub: "你以为被忽略的那些温柔，其实都被悄悄珍藏着。会有回应的。" },
+                { main: "别活在别人的期待里。", sub: "父母、朋友、社会的期待都不重要，重要的是你想成为什么样的人。" },
+                { main: "这段时间适合专注内在。", sub: "不要急着向外求，先向内看。了解自己，比了解世界更重要。" },
+                { main: "你值得被爱，不需要改变。", sub: "不需要变得更瘦、更美、更温柔才配被爱。你现在这样，就值得。" },
+                { main: "这个机会，抓住就是了。", sub: "犹豫就会错过。有些机会不会等你准备好，先跳进去再说。" },
+                { main: "你的疲惫是真实的，不是矫情。", sub: "累了就承认，不需要假装坚强。真正的勇敢是承认脆弱。" },
+                { main: "那些嫉妒你的人，证明你做对了。", sub: "被议论、被嫉妒，说明你正在往上走。别被噪音影响。" },
+                { main: "你需要的是陪伴，不是建议。", sub: "有时候倾诉不是为了得到答案，只是需要有人听。找对人说话。" },
+                { main: "这段感情，需要时间冷静。", sub: "暂时分开不是放弃，是给彼此空间。冷静后再决定是否继续。" },
+                { main: "你的直觉在保护你。", sub: "那种说不清的不安感，往往是潜意识在警告。听从它，别说服自己。" },
+                { main: "换份工作，会有新突破。", sub: "现在的平台限制了你，去更大的地方，你会发现自己的可能性。" },
+                { main: "这个投资值得。", sub: "虽然需要付出，但长远来看是增值的。相信自己的判断。" },
+                { main: "你的底线，不容任何人践踏。", sub: "让步一次，就会有第二次。这次，坚定地说不。" },
+                { main: "孤独是成长的必经之路。", sub: "一个人的时光，是在学习与自己相处。这段经历会让你更强大。" },
+                { main: "你的选择，会被时间证明是对的。", sub: "现在看起来冒险的决定，几年后会庆幸自己当初的勇敢。" },
+                { main: "这段关系，该升级了。", sub: "如果你们已经准备好，不要再拖延。该确定关系就确定，该结婚就结婚。" },
+                { main: "你缺的不是方向，是执行力。", sub: "目标已经很清楚了，现在需要的是少说多做。行动起来。" },
+                { main: "那个人会回来的。", sub: "如果这段缘分还没结束，该来的总会来。但不要傻等，继续过好自己的生活。" },
+                { main: "你的健康需要被重视。", sub: "身体的信号不能忽略，该检查就检查，该调整就调整。健康是1，其他是0。" },
+                { main: "这次，宇宙在帮你筛选。", sub: "那些离开的人，都是为了给对的人腾位置。相信这个过程。" },
+                { main: "你的天赋在被浪费。", sub: "现在做的事，不是你真正擅长的。找到那个让你发光的领域。" },
+                { main: "别把关系看得太重。", sub: "过度在意反而会失去。保持适当的距离，关系才健康。" },
+                { main: "这个决定会让你后悔。", sub: "冷静下来再想想，有些东西失去了就回不来了。三思而后行。" },
+                { main: "你需要一场说走就走的旅行。", sub: "换个环境，很多困扰会自动解开。出去走走，给心灵放个假。" },
+                { main: "这段时间适合学习新技能。", sub: "投资自己永远不亏。学会的东西，是别人拿不走的财富。" },
+                { main: "你的善良要有锋芒。", sub: "对的人温柔，对错的人冷漠。善良不是软弱，该强硬时要强硬。" },
+                { main: "这次的痛苦，是在帮你蜕变。", sub: "破茧成蝶是痛苦的，但只有经历这个过程，才能飞起来。" },
+                { main: "你和对方，频率不同。", sub: "不是谁的错，只是不合适。强求只会更累，放手是解脱。" },
+                { main: "这个时间点，做什么都顺。", sub: "你的运势正处在上升期，大胆去做那些一直想做的事。" },
+                { main: "你需要建立自己的边界。", sub: "让别人知道你的底线在哪里。没有边界的关系，会耗尽你。" },
+                { main: "那些不理解你的人，不配你解释。", sub: "真正在意你的人，会主动理解。不在意的人，解释也没用。" },
+                { main: "你的沉默，比争吵更有力量。", sub: "有些话不需要说，有些人不值得吵。沉默是最好的回应。" },
+                { main: "这段感情，需要仪式感。", sub: "用心经营的关系，需要被看见。该纪念就纪念，该庆祝就庆祝。" },
+                { main: "你的恐惧，都是想象出来的。", sub: "最坏的结果，往往没有你想的那么糟。行动起来，恐惧会消失。" },
+                { main: "这次的失败，是在铺路。", sub: "每一次跌倒，都是在为更大的成功做准备。别灰心，继续走。" },
+                { main: "你需要断舍离。", sub: "扔掉那些占据空间的东西，包括物品、关系、回忆。轻装才能前行。" },
+                { main: "这个人，会给你想要的安全感。", sub: "遇到对的人，你不会患得患失。如果总是不安，说明还不对。" },
+                { main: "你的计划会实现，但会换个形式。", sub: "结果可能不是你预期的样子，但会是更好的版本。保持开放。" },
+                { main: "别急着和解，该冷就冷着。", sub: "有些关系需要距离，有些人需要被晾一晾。不要主动低头。" },
+                { main: "你的价值观在升级。", sub: "很多过去在意的东西，现在不在意了。这是成长的标志。" },
+                { main: "这个阶段，适合积累而非展示。", sub: "低头做事，不要急着让别人看到。真正的实力，不需要证明。" },
+                { main: "你的委屈，会换来成长。", sub: "那些让你受伤的经历，都在教你如何保护自己。疼过后会更强。" },
+                { main: "这个机会，是命运的礼物。", sub: "看似意外的机会，其实是你一直在准备的结果。大胆接住它。" },
+                { main: "你需要重新定义成功。", sub: "别人眼中的成功，不一定适合你。找到自己的节奏和标准。" },
+                { main: "这段关系，该设置期限了。", sub: "如果一直没有进展，给它一个期限。到时候再决定去留。" },
+                { main: "你的内耗，来自对未知的恐惧。", sub: "专注当下能做的事，未来的事交给未来。活在此刻。" },
+                { main: "那些批评你的人，是在帮你筛选朋友。", sub: "真正的朋友，会在你不完美时依然支持你。其他人不重要。" },
+                { main: "你的天赋，该被变现了。", sub: "不要让爱好只是爱好，想办法让它养活你。天赋是用来绽放的。" },
+                { main: "这次的改变，会带来蝴蝶效应。", sub: "一个小的调整，会引发一系列连锁反应。相信改变的力量。" },
+                { main: "你和父母的关系，该重新定义了。", sub: "长大后的你，可以选择保持距离、设立边界。不需要愧疚。" },
+                { main: "这段时间适合复盘和整理。", sub: "停下来看看自己走过的路，总结经验，为下一步做准备。" },
+                { main: "你的直觉和现实，都指向同一个答案。", sub: "当理性和感性一致时，就是行动的时候。不要再犹豫了。" },
+                { main: "这个人，不会改变。", sub: "期待一个人改变，是在浪费时间。要么接受，要么离开。" },
+                { main: "你需要的是行动，而非完美计划。", sub: "计划永远赶不上变化，先做起来，边做边调整。完美是敌人。" },
+                { main: "世界正温柔地爱着你。", sub: "那些看似偶然的美好，都是宇宙在以它的方式守护你。感受这份爱。" }
+            ];
+
+            // DOM元素
+            const bookTrigger = document.getElementById('bookTrigger');
+            const mainScene = document.getElementById('mainScene');
+            const answerScene = document.getElementById('answerScene');
+            const answerMain = document.getElementById('answerMain');
+            const answerExtended = document.getElementById('answerExtended');
+            const retryBtn = document.getElementById('retryBtn');
+            const saveBtn = document.getElementById('saveBtn');
+
+            let chargeTimer = null;
+            let chargeProgress = 0;
+            const CHARGE_DURATION = 1500;
+
+            // 初始化星空 - 三层星星
+            function initStars() {
+                const starsContainer = document.getElementById('stars');
+                
+                for (let i = 0; i < 30; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star layer-1';
+                    star.style.left = Math.random() * 100 + '%';
+                    star.style.top = Math.random() * 100 + '%';
+                    star.style.animationDelay = Math.random() * 4 + 's';
+                    star.style.animationDuration = (3 + Math.random() * 3) + 's';
+                    starsContainer.appendChild(star);
+                }
+                
+                for (let i = 0; i < 50; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star layer-2';
+                    star.style.left = Math.random() * 100 + '%';
+                    star.style.top = Math.random() * 100 + '%';
+                    star.style.animationDelay = Math.random() * 4 + 's';
+                    star.style.animationDuration = (2 + Math.random() * 4) + 's';
+                    starsContainer.appendChild(star);
+                }
+                
+                for (let i = 0; i < 80; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star layer-3';
+                    star.style.left = Math.random() * 100 + '%';
+                    star.style.top = Math.random() * 100 + '%';
+                    star.style.animationDelay = Math.random() * 4 + 's';
+                    star.style.animationDuration = (4 + Math.random() * 4) + 's';
+                    starsContainer.appendChild(star);
+                }
+            }
+
+            function createShootingStar() {
+                const star = document.createElement('div');
+                star.className = 'shooting-star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 50 + '%';
+                document.getElementById('stars').appendChild(star);
+                
+                setTimeout(() => star.remove(), 3000);
+            }
+
+            setInterval(() => {
+                if (Math.random() > 0.5) {
+                    createShootingStar();
+                }
+            }, 2000);
+
+            function startCharging() {
+                if (chargeProgress > 0) return;
+                
+                chargeProgress = 0;
+                bookTrigger.classList.add('charging');
+                
+                const startTime = Date.now();
+                
+                chargeTimer = setInterval(() => {
+                    const elapsed = Date.now() - startTime;
+                    chargeProgress = Math.min((elapsed / CHARGE_DURATION) * 100, 100);
+                    
+                    if (chargeProgress >= 100) {
+                        clearInterval(chargeTimer);
+                        showAnswer();
+                    }
+                }, 16);
+            }
+
+            function cancelCharging() {
+                if (chargeProgress < 100) {
                     clearInterval(chargeTimer);
-                    showAnswer();
+                    bookTrigger.classList.remove('charging');
+                    chargeProgress = 0;
                 }
-            }, 16);
-        }
-
-        // 取消蓄力
-        function cancelCharging() {
-            if (chargeProgress < 100) {
-                clearInterval(chargeTimer);
-                bookTrigger.classList.remove('charging');
-                chargeProgress = 0;
             }
-        }
 
-        // 创建萤火虫效果
-        function createFireflies() {
-            const container = document.getElementById('answerScene');
-            for (let i = 0; i < 20; i++) {
-                const firefly = document.createElement('div');
-                firefly.className = 'firefly';
-                firefly.style.left = Math.random() * 100 + '%';
-                firefly.style.top = 60 + Math.random() * 40 + '%';
-                firefly.style.setProperty('--tx', (Math.random() - 0.5) * 100 + 'px');
-                firefly.style.animationDelay = Math.random() * 3 + 's';
-                firefly.style.animationDuration = (4 + Math.random() * 4) + 's';
-                container.appendChild(firefly);
+            function createFireflies() {
+                const container = document.getElementById('answerScene');
+                for (let i = 0; i < 20; i++) {
+                    const firefly = document.createElement('div');
+                    firefly.className = 'firefly';
+                    firefly.style.left = Math.random() * 100 + '%';
+                    firefly.style.top = 60 + Math.random() * 40 + '%';
+                    firefly.style.setProperty('--tx', (Math.random() - 0.5) * 100 + 'px');
+                    firefly.style.animationDelay = Math.random() * 3 + 's';
+                    firefly.style.animationDuration = (4 + Math.random() * 4) + 's';
+                    container.appendChild(firefly);
+                }
             }
-        }
 
-        // 显示答案 - 逐字浮现
-        function showAnswer() {
-            // 场景切换
-            mainScene.classList.add('fadeout');
-            
-            setTimeout(() => {
-                mainScene.style.display = 'none';
-                answerScene.classList.add('show');
+            function showAnswer() {
+                mainScene.classList.add('fadeout');
                 
-                // 生成萤火虫
-                createFireflies();
+                setTimeout(() => {
+                    mainScene.style.display = 'none';
+                    answerScene.classList.add('show');
+                    
+                    createFireflies();
+                    
+                    const answerData = answers[Math.floor(Math.random() * answers.length)];
+                    
+                    answerExtended.textContent = answerData.sub;
+                    
+                    answerMain.innerHTML = '';
+                    const chars = answerData.main.split('');
+                    
+                    chars.forEach((char, index) => {
+                        const span = document.createElement('span');
+                        span.className = 'answer-char';
+                        span.textContent = char;
+                        span.style.animationDelay = (index * 0.1) + 's';
+                        answerMain.appendChild(span);
+                    });
+                    
+                }, 800);
+            }
+
+            retryBtn.addEventListener('click', function() {
+                document.querySelectorAll('.firefly').forEach(f => f.remove());
                 
-                // 随机选择答案
-                const answerData = answers[Math.floor(Math.random() * answers.length)];
+                answerScene.classList.remove('show');
                 
-                // 显示延伸解读
-                answerExtended.textContent = answerData.sub;
-                
-                // 主文案逐字显示
-                answerMain.innerHTML = '';
-                const chars = answerData.main.split('');
-                
-                chars.forEach((char, index) => {
-                    const span = document.createElement('span');
-                    span.className = 'answer-char';
-                    span.textContent = char;
-                    span.style.animationDelay = (index * 0.1) + 's';
-                    answerMain.appendChild(span);
-                });
-                
-            }, 800);
-        }
+                setTimeout(() => {
+                    mainScene.style.display = 'flex';
+                    mainScene.classList.remove('fadeout');
+                    bookTrigger.classList.remove('charging');
+                    chargeProgress = 0;
+                }, 500);
+            });
 
-        // 再问一次
-        retryBtn.addEventListener('click', function() {
-            // 清除萤火虫
-            document.querySelectorAll('.firefly').forEach(f => f.remove());
-            
-            answerScene.classList.remove('show');
-            
-            setTimeout(() => {
-                mainScene.style.display = 'flex';
-                mainScene.classList.remove('fadeout');
-                bookTrigger.classList.remove('charging');
-                chargeProgress = 0;
-            }, 500);
-        });
+            saveBtn.addEventListener('click', function() {
+                alert('感谢分享！你可以截图保存这段话，也可以在社交平台分享「疗愈解药」');
+            });
 
-        // 保存答案
-        saveBtn.addEventListener('click', function() {
-            alert('感谢分享！你可以截图保存这段话，也可以在社交平台分享「疗愈解药」');
-        });
-
-        // 长按事件监听
-        let pressTimer;
-
-        // 鼠标事件
-        bookTrigger.addEventListener('mousedown', function(e) {
-            e.preventDefault();
-            startCharging();
-        });
-
-        window.addEventListener('mouseup', function() {
-            cancelCharging();
-        });
-
-        // 触摸事件
-        bookTrigger.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            startCharging();
-        });
-
-        window.addEventListener('touchend', function(e) {
-            cancelCharging();
-        });
-
-        // 防止拖动
-        bookTrigger.addEventListener('dragstart', function(e) {
-            e.preventDefault();
-            return false;
-        });
-
-        // 初始化
-        initStars();
-        
-        // 添加键盘快捷键（空格键触发）
-        document.addEventListener('keydown', function(e) {
-            if (e.code === 'Space' && mainScene.style.display !== 'none') {
+            bookTrigger.addEventListener('mousedown', function(e) {
                 e.preventDefault();
-                if (chargeProgress === 0) {
-                    startCharging();
-                }
-            }
-        });
+                startCharging();
+            });
 
-        document.addEventListener('keyup', function(e) {
-            if (e.code === 'Space') {
+            window.addEventListener('mouseup', function() {
                 cancelCharging();
-            }
-        });
+            });
+
+            bookTrigger.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                startCharging();
+            });
+
+            window.addEventListener('touchend', function(e) {
+                cancelCharging();
+            });
+
+            bookTrigger.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            initStars();
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.code === 'Space' && mainScene.style.display !== 'none') {
+                    e.preventDefault();
+                    if (chargeProgress === 0) {
+                        startCharging();
+                    }
+                }
+            });
+
+            document.addEventListener('keyup', function(e) {
+                if (e.code === 'Space') {
+                    cancelCharging();
+                }
+            });
+        }
     </script>
 </body>
 </html>
